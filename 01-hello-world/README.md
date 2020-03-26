@@ -11,4 +11,6 @@ In this part of the tutorial we'll write two programs using the spring-amqp libr
 
 In the diagram below, "P" is our producer and "C" is our consumer. The box in the middle is a queue - a message buffer that RabbitMQ keeps on behalf of the consumer.
 
-<img src="https://www.rabbitmq.com/img/tutorials/python-one.png" class="center" alt="tutorial 01 : Hello World">
+<p align="center">
+  <img src="https://www.rabbitmq.com/img/tutorials/python-one.png" alt="tutorial 01 : Hello World" />
+</p>
