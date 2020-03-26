@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../style.css'">
-
 # Tutorial 1 : Hello World
 
 ## REFERENCE
