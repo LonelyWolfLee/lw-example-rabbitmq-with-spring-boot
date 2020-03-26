@@ -16,13 +16,13 @@ import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
 @EnableScheduling
-class HelloWorldApplication {
+class WorkQueueApplication {
   @Profile("usage_message")
   @Bean
   fun usage(): CommandLineRunner = CommandLineRunner {
     println("This app uses Spring Profiles to control its behavior.\n")
-    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=hello-world,receiver")
-    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=hello-world,sender")
+    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=work-queue,receiver")
+    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=work-queue,sender")
   }
 
   @Profile("!usage_message")
@@ -33,12 +33,12 @@ class HelloWorldApplication {
 }
 
 fun main(args: Array<String>) {
-  runApplication<HelloWorldApplication>(*args)
+  runApplication<WorkQueueApplication>(*args)
 }
 
-@Profile("hello-world")
+@Profile("work-queue")
 @Configuration
-class Tut1Config {
+class Tut2Config {
   @Bean
   fun hello(): Queue {
     return Queue("hello")
@@ -46,16 +46,21 @@ class Tut1Config {
 
   @Profile("sender")
   @Bean
-  fun sender(): Tut1Sender {
-    return Tut1Sender()
+  fun sender(): Tut2Sender {
+    return Tut2Sender()
   }
 
   @Profile("receiver")
-  @Bean
-  fun receiver(): Tut1Receiver {
-    return Tut1Receiver()
+  class ReceiverConfig {
+    @Bean
+    fun receiver1(): Tut2Receiver {
+      return Tut2Receiver(1)
+    }
+    @Bean
+    fun receiver2(): Tut2Receiver {
+      return Tut2Receiver(2)
+    }
   }
-
 }
 
 class RabbitAmqpTutorialsRunner : CommandLineRunner {
