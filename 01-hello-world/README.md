@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../style.css'">
+
 # Tutorial 1 : Hello World
 
 ## REFERENCE
@@ -9,4 +11,4 @@ In this part of the tutorial we'll write two programs using the spring-amqp libr
 
 In the diagram below, "P" is our producer and "C" is our consumer. The box in the middle is a queue - a message buffer that RabbitMQ keeps on behalf of the consumer.
 
-![tutorial 01 : hello world](https://www.rabbitmq.com/img/tutorials/python-one.png)
+<img src="https://www.rabbitmq.com/img/tutorials/python-one.png" class="center" alt="tutorial 01 : Hello World">
