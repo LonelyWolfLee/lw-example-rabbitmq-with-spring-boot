@@ -18,6 +18,8 @@ RabbitMQ 는 AMQP(Advanced Message Queuing Protocol)을 충실히 구현하고 �
 
 ### Jargon (용어)
 
+###### RabbitMQ Server == MQ System == (Message) Broker
+
 ##### Producer
 
 `Sender`. MQ 시스템으로 메세지를 보내는 프로그램 입니다.
@@ -25,10 +27,6 @@ RabbitMQ 는 AMQP(Advanced Message Queuing Protocol)을 충실히 구현하고 �
 ##### Consumer
 
 `Receiver`. MQ 시스템으로 부터 메세지를 받기 위해 기다리는 프로그램 입니다.
-
-##### Queue
-
-`Message Buffer`. 메세지가 MQ 시스템과 어플리케이션을 따라 흐를 수 있게 하는 메세지 대기열 입니다. 메세지는 Queue 내부에만 저장이 될수 있으며 그 양은 설정된 Host 의 메모리 및 디스크 용량에 의해서만 제한됩니다. 여러 Client 가 하나의 Queue 에서 메세지를 주고 받을 수 있습니다.
 
 ##### Exchange
 
@@ -42,6 +40,10 @@ RabbitMQ 는 AMQP(Advanced Message Queuing Protocol)을 충실히 구현하고 �
 | Headers exchange | amq.match (and amq.headers in RabbitMQ) |
 
 ##### Binding
+
+##### Queue
+
+`Message Buffer`. 메세지가 MQ 시스템과 어플리케이션을 따라 흐를 수 있게 하는 메세지 대기열 입니다. 메세지는 Queue 내부에만 저장이 될수 있으며 그 양은 설정된 Host 의 메모리 및 디스크 용량에 의해서만 제한됩니다. 여러 Client 가 하나의 Queue 에서 메세지를 주고 받을 수 있습니다.
 
 ##### Connection
 
