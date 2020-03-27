@@ -60,17 +60,33 @@ Exchange 는 내구성이 있을 수도 있고 (durable) 일시적일 수도 있
 `Direct exchange` 는 routing key 를 기반으로 queue 로 메세지를 전달 합니다. Direct exchange 는 (물론 multicast routing 도 가능하지만) unicast routing 에 이상적입니다. 동작 방식은 아래와 같습니다.
 
 - Queue 가 routing key 가 일치하는 Exchange 에 Binding 됩니다.
-- 새로운 메세지가 Direct exchange 로 도착을 하면 routing key 가 일치 할 경우 해당 queue 로 메세지를 routing 해줍니다.
+- 새로운 메세지가 Direct exchange 로 도착을 했을 때, routing key 가 일치 할 경우 해당 queue 로 메세지를 routing 해줍니다.
 
- Direct exchange 를 사용하여 복수개의 Worker 에 Round Robin 방식으로 메세지를 분배 할 수 있는데, 메세지의 Load Balancing 은 queue 간이 아니라 Consumer 단위로 Load Balancing 됨을 이해하는 것이 중요합니다.
+Direct exchange 를 사용하여 복수개의 Worker 에 Round Robin 방식으로 메세지를 분배 할 수 있는데, 메세지의 Load Balancing 은 queue 단위가  아니라 Consumer 단위로 Load Balancing 됨을 이해하는 것이 중요합니다.
+
+<p align="center">
+  <img src="https://www.rabbitmq.com/img/tutorials/intro/exchange-direct.png" alt="Direct exchange"/>
+</p>
 
 #### Fanout exchange
 
+
+
+<p align="center">
+  <img src="https://www.rabbitmq.com/img/tutorials/intro/exchange-fanout.png" alt="Direct exchange"/>
+</p>
+
 #### Topic exchange
+
+
 
 #### Headers exchange
 
+
+
 ### Binding
+
+
 
 ### Queue
 
@@ -78,7 +94,13 @@ Exchange 는 내구성이 있을 수도 있고 (durable) 일시적일 수도 있
 
 ### Connection
 
+
+
 ### Channel
 
+
+
 ### Virtual Host (vhost)
+
+
 
