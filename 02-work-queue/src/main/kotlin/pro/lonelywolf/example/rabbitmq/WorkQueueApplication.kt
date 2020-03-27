@@ -4,7 +4,6 @@ import org.springframework.amqp.core.Queue
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.ConfigurableApplicationContext
@@ -21,8 +20,8 @@ class WorkQueueApplication {
   @Bean
   fun usage(): CommandLineRunner = CommandLineRunner {
     println("This app uses Spring Profiles to control its behavior.\n")
-    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=work-queue,receiver")
-    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=work-queue,sender")
+    println("Sample usage: java -jar 02-work-queue-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=work-queue,receiver")
+    println("Sample usage: java -jar 02-work-queue-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=work-queue,sender")
   }
 
   @Profile("!usage_message")
@@ -56,6 +55,7 @@ class Tut2Config {
     fun receiver1(): Tut2Receiver {
       return Tut2Receiver(1)
     }
+
     @Bean
     fun receiver2(): Tut2Receiver {
       return Tut2Receiver(2)

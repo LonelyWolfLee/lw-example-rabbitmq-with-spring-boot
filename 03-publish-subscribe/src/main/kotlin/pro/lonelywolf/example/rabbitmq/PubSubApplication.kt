@@ -1,6 +1,6 @@
 package pro.lonelywolf.example.rabbitmq
 
-import org.springframework.amqp.core.Queue
+import org.springframework.amqp.core.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
@@ -15,13 +15,13 @@ import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
 @EnableScheduling
-class HelloWorldApplication {
+class PubSubApplication {
   @Profile("usage_message")
   @Bean
   fun usage(): CommandLineRunner = CommandLineRunner {
     println("This app uses Spring Profiles to control its behavior.\n")
-    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=hello-world,receiver")
-    println("Sample usage: java -jar 01-hello-world-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=hello-world,sender")
+    println("Sample usage: java -jar 03-publish-subscribe-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=pub-sub,receiver --tutorial.client.duration=60000")
+    println("Sample usage: java -jar 03-publish-subscribe-0.0.1-SNAPSHOT-boot.jar --spring.profiles.active=pub-sub,sender --tutorial.client.duration=60000")
   }
 
   @Profile("!usage_message")
@@ -32,29 +32,50 @@ class HelloWorldApplication {
 }
 
 fun main(args: Array<String>) {
-  runApplication<HelloWorldApplication>(*args)
+  runApplication<PubSubApplication>(*args)
 }
 
-@Profile("hello-world")
+@Profile("pub-sub")
 @Configuration
-class Tut1Config {
+class Tut3Config {
   @Bean
-  fun hello(): Queue {
-    return Queue("hello")
+  fun fanout(): FanoutExchange {
+    return FanoutExchange("tut.fanout")
   }
 
   @Profile("sender")
   @Bean
-  fun sender(): Tut1Sender {
-    return Tut1Sender()
+  fun sender(): Tut3Sender {
+    return Tut3Sender()
   }
 
   @Profile("receiver")
-  @Bean
-  fun receiver(): Tut1Receiver {
-    return Tut1Receiver()
-  }
+  class ReceiverConfig {
+    @Bean
+    fun autoDeleteQueue1(): Queue {
+      return AnonymousQueue()
+    }
 
+    @Bean
+    fun autoDeleteQueue2(): Queue {
+      return AnonymousQueue()
+    }
+
+    @Bean
+    fun binding1(fanout: FanoutExchange, autoDeleteQueue1: Queue): Binding {
+      return BindingBuilder.bind(autoDeleteQueue1).to(fanout)
+    }
+
+    @Bean
+    fun binding2(fanout: FanoutExchange, autoDeleteQueue2: Queue): Binding {
+      return BindingBuilder.bind(autoDeleteQueue2).to(fanout)
+    }
+
+    @Bean
+    fun receiver(): Tut3Receiver {
+      return Tut3Receiver()
+    }
+  }
 }
 
 class RabbitAmqpTutorialsRunner : CommandLineRunner {
